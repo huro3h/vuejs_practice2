@@ -1,24 +1,36 @@
-const MyButton = {
-  data: function () {
-    return {
-      textLabel: 'child'
+const TodoList = {
+  props: {
+    todos: {
+      type: Array,
+      required: true
     }
   },
   template: `
-    <button>
-      <slot>OK</slot>
-    </button>
+    <ul>
+      <template v-for="todo in todos">
+        <slot :todo="todo">
+          <li :key="todo.id">
+            {{ todo.text }}
+          </li>
+        </slot>
+      </template>
+    </ul>
   `
 }
 
 new Vue({
   el: '#app',
-  data: function () {
+  data: function() {
     return {
-      textLabel: 'parent?'
+      todos: [
+        { id: 1, text: 'hoge', isCompleted: true },
+        { id: 2, text: 'h', isCompleted: false },
+        { id: 3, text: 'ho', isCompleted: true },
+        { id: 4, text: 'hog', isCompleted: false }
+      ]
     }
   },
   components: {
-    MyButton: MyButton
+    TodoList: TodoList
   }
 })

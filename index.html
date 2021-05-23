@@ -7,8 +7,11 @@
 </head>
 <body>
   <div id="app">
-    <my-button>送信</my-button>
-    <my-button>{{ textLabel }}</my-button>
+    <todo-list :todos="todos">
+      <li slot-scope="slotProps" v-if="slotProps.todo.isCompleted">
+        {{ slotProps.todo.text }}
+      </li>
+    </todo-list>
   </div>
 </body>
 </html>

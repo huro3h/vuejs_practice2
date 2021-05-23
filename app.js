@@ -1,38 +1,24 @@
-// const MyButton = {
-//   template: `
-//     <button>
-//       <slot>OKです</slot>
-//     </button>
-//   `
-// }
-//
-// new Vue({
-//   el: app,
-//   components: {
-//     MyButton: MyButton
-//   }
-// })
-
-// named slot
-const MyPage = {
+const MyButton = {
+  data: function () {
+    return {
+      textLabel: 'child'
+    }
+  },
   template: `
-    <div>
-      <header>
-        <slot name="header"></slot>
-      </header>
-      <main>
-        <slot></slot>
-      </main>
-      <footer>
-        <slot name="footer"></slot>
-      </footer>
-    </div> 
+    <button>
+      <slot>OK</slot>
+    </button>
   `
-} 
+}
 
 new Vue({
-  el: app,
+  el: '#app',
+  data: function () {
+    return {
+      textLabel: 'parent?'
+    }
+  },
   components: {
-    MyPage: MyPage
+    MyButton: MyButton
   }
 })

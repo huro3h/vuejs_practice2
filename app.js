@@ -1,36 +1,20 @@
-const TodoList = {
-  props: {
-    todos: {
-      type: Array,
-      required: true
-    }
+Vue.directive('fallback-image', {
+  bind: function (el, binding) {
+    console.log('bind', binding)
+    el.addEventListener('error', function() {
+      el.src = 'https://dummyimage.com/200x200/000/fff'
+    })
   },
-  template: `
-    <ul>
-      <template v-for="todo in todos">
-        <slot :todo="todo">
-          <li :key="todo.id">
-            {{ todo.text }}
-          </li>
-        </slot>
-      </template>
-    </ul>
-  `
-}
+  update: function(el, binding) {
+    console.log('update', binding)
+  }
+})
 
-new Vue({
+const vm = new Vue({
   el: '#app',
-  data: function() {
+  data: function () {
     return {
-      todos: [
-        { id: 1, text: 'hoge', isCompleted: true },
-        { id: 2, text: 'h', isCompleted: false },
-        { id: 3, text: 'ho', isCompleted: true },
-        { id: 4, text: 'hog', isCompleted: false }
-      ]
+      altText: 'logo'
     }
-  },
-  components: {
-    TodoList: TodoList
   }
 })

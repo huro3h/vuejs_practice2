@@ -7,11 +7,7 @@
 </head>
 <body>
   <div id="app">
-    <todo-list :todos="todos">
-      <li slot-scope="{ todo }" v-show="todo.isCompleted">
-        {{ todo.text }}
-      </li>
-    </todo-list>
+    <img v-fallback-image src="./picture.png" :alt="altText">  
   </div>
 </body>
 </html>

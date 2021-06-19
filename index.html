@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
   <title>Vue app</title>
   <script src="https://unpkg.com/vue@2.6.12"></script>
+  <meta charset="UTF-8">
 </head>
 <body>
   <div id="app">
-    <img v-fallback-image src="./picture.png" :alt="altText">  
+    <img v-fallback-image.once="noImageURL" src="./picture_none.png" :alt="altText">
   </div>
 </body>
 </html>

@@ -1,3 +1,28 @@
+// mixin
+const Sharable = {
+  data: function () {
+    return {
+      _isProcessing: false
+    }
+  },
+  methods: {
+    share: function () {
+      if (this._isProcessing) {
+        return
+      }
+      if (!window.confirm('share???')) {
+        return
+      }
+      this._isProcessing = true
+      
+      // API's mock..
+      setTimeout(() => {
+        console.log('shared...');
+      }, 200)
+    }
+  }
+}
+
 const IconShareButton = {
   template: `
     <button @click="share"><i class="fas fa-share-square"></i></button>

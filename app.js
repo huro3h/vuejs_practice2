@@ -1,61 +1,36 @@
-// mixin
-const Sharable = {
+// global mixin
+Vue.mixin({
   data: function () {
     return {
-      _isProcessing: false
+      loggedInUser: null
     }
   },
   created: function () {
-    console.log('Sharable created');
-  },
-  methods: {
-    share: function () {
-      if (this._isProcessing) {
-        return
-      }
-      if (!window.confirm('share???')) {
-        return
-      }
-      this._isProcessing = true
-      
-      // API's mock..
-      setTimeout(() => {
-        console.log('shared...');
-      }, 200)
+    const auth = this.$options.auth
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
+    if (auth && !this.loggedInUser) {
+      console.log('must login..');
     }
   }
-}
+})
 
-const IconShareButton = {
-  mixins: [Sharable],
-  created: function () {
-    console.log('IconShareButtons created');
-  },
+const LoginRequiredPage = {
+  auth: true,
   template: `
-    <button @click="share"><i class="fas fa-share-square"></i></button>
+    <div>
+      <p v-if="!loggedInUser">
+        ログインが必要です
+      </p>
+      <p v-else>
+        {{ loggedInUser.name }}さんでログイン中...
+      </p>
+    </div>
   `
-}
-
-const TextShareButton = {
-  mixins: [Sharable],
-  created: function () {
-    console.log('TextShareButton created');
-  },
-  template: `
-    <button @click="share">{{ buttonLabel }}</button>
-  `,
-  data: function () {
-    return {
-      buttonLabel: 'share suru-',
-      _isProcessing: false
-    }
-  }
 }
 
 new Vue({
   el: '#app',
   components: {
-    IconShareButton,
-    TextShareButton
+    LoginRequiredPage
   }
 })

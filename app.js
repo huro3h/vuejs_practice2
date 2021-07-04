@@ -5,6 +5,9 @@ const Sharable = {
       _isProcessing: false
     }
   },
+  created: function () {
+    console.log('Sharable created');
+  },
   methods: {
     share: function () {
       if (this._isProcessing) {
@@ -24,36 +27,20 @@ const Sharable = {
 }
 
 const IconShareButton = {
+  mixins: [Sharable],
+  created: function () {
+    console.log('IconShareButtons created');
+  },
   template: `
     <button @click="share"><i class="fas fa-share-square"></i></button>
-  `,
-  data: function () {
-    return {
-      _isProcessing: false
-    }
-  },
-  methods: {
-    share: function () {
-      if (this._isProcessing) {
-        return
-      }
-      if (!window.confirm('share?')) {
-        return
-      }
-      this._isProcessing = true
-      
-      // APIのモック
-      setTimeout(() => {
-        console.log('shared!!!');
-        this._isProcessing = false
-        console.log(this._isProcessing);
-        
-      }, 1500)
-    }
-  }
+  `
 }
 
 const TextShareButton = {
+  mixins: [Sharable],
+  created: function () {
+    console.log('TextShareButton created');
+  },
   template: `
     <button @click="share">{{ buttonLabel }}</button>
   `,
@@ -61,25 +48,6 @@ const TextShareButton = {
     return {
       buttonLabel: 'share suru-',
       _isProcessing: false
-    }
-  },
-  methods: {
-    share: function () {
-      if (this._isProcessing) {
-        return
-      }
-      if (!window.confirm('share?')) {
-        return
-      }
-      this._isProcessing = true
-  
-      // APIのモック
-      setTimeout(() => {
-        console.log('shared!!!');
-        this._isProcessing = false
-        console.log(this._isProcessing);
-    
-      }, 1500)
     }
   }
 }

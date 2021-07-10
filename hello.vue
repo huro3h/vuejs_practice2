@@ -10,6 +10,6 @@
   }
 </script>
 
-<style>
+<style scoped>
   .message { color: blue; }
 </style>
